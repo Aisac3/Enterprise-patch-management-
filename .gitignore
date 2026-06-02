@@ -1,0 +1,27 @@
+# Terraform
+**/.terraform/
+
+# Terraform State Files
+*.tfstate
+*.tfstate.*
+
+# Terraform Lock File
+.terraform.lock.hcl
+
+# Terraform Variables
+*.tfvars
+*.tfvars.json
+
+# Terraform Plans
+*.tfplan
+*.plan
+
+# Keys
+*.pem
+*.key
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
