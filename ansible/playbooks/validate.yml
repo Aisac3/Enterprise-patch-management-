@@ -1,0 +1,9 @@
+---
+- name: Validate Infrastructure
+  hosts: all
+  gather_facts: false
+
+  tasks:
+
+    - name: Verify connectivity
+      ping:

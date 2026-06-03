@@ -1,0 +1,41 @@
+name: Ansible CI
+
+on:
+    push:
+        paths:
+            - 'ansible/**'
+            - '.github/workflows/ansible.yml'
+
+    pull_request:
+        paths:
+            - 'ansible/**'
+            - '.github/workflows/ansible.yml'
+
+jobs:
+    ansible:
+        runs-on: ubuntu-latest
+        steps:
+
+            - name: Checkout Repository
+              uses: actions/checkout@v4
+
+            - name: Install Ansible
+              run: |
+                python3 -m pip install --upgrade pip
+                pip install ansible
+
+            - name: Verify Ansible Version
+              run: ansible --version
+
+            - name: Syntax Check - Validate Playbook
+              run: |
+                ansible-playbook playbooks/validate.yml --syntax-check
+
+            - name: Syntax Check - Compliance Playbook
+              run: |
+                ansible-playbook playbooks/compliance.yml --syntax-check
+
+            - name: Syntax Check - Reporting Playbook
+              run: |
+                ansible-playbook playbooks/reporting.yml --syntax-check
+
