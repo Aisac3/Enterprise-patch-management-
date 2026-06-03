@@ -33,5 +33,5 @@ resource "aws_security_group" "rhel_sg" {
 
 resource "aws_key_pair" "patch_key" {
   key_name   = "enterprise-patch-key"
-  public_key = file(pathexpand("~/.ssh/enterprise-patch-key.pub"))
+  public_key = file("${path.module}/keys/enterprise-patch-key.pub")
 }
