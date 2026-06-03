@@ -27,6 +27,13 @@ jobs:
             - name: Verify Ansible Version
               run: ansible --version
 
+            - name: Show Repository Structure
+              run: |
+                pwd
+                ls -la
+                find . -type f | sort
+            
+
             - name: Syntax Check - Validate Playbook
               run: |
                 ansible-playbook playbooks/validate.yml --syntax-check
