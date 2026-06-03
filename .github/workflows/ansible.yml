@@ -14,8 +14,10 @@ on:
 jobs:
     ansible:
         runs-on: ubuntu-latest
+        defaults: 
+            run: 
+                working-directory: ansible
         steps:
-
             - name: Checkout Repository
               uses: actions/checkout@v4
 
@@ -36,13 +38,13 @@ jobs:
 
             - name: Syntax Check - Validate Playbook
               run: |
-                ansible-playbook ansible/playbooks/validate.yml --syntax-check
+                ansible-playbook playbooks/validate.yml --syntax-check
 
             - name: Syntax Check - Compliance Playbook
               run: |
-                ansible-playbook ansible/playbooks/compliance.yml --syntax-check
+                ansible-playbook playbooks/compliance.yml --syntax-check
 
             - name: Syntax Check - Reporting Playbook
               run: |
-                ansible-playbook ansible/playbooks/reporting.yml --syntax-check
+                ansible-playbook playbooks/reporting.yml --syntax-check
 
