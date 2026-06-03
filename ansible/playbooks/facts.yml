@@ -1,0 +1,21 @@
+---
+- hosts: all
+  gather_facts: true
+
+  tasks:
+
+    - name: Show hostname
+      debug:
+        var: ansible_hostname
+
+    - name: Show OS
+      debug:
+        var: ansible_distribution
+
+    - name: Show kernel
+      debug:
+        var: ansible_kernel
+
+    - name: Show memory
+      debug:
+        var: ansible_memtotal_mb

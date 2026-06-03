@@ -1,0 +1,7 @@
+---
+- name: Compliance Audit
+  hosts: all
+  gather_facts: true
+
+  roles:
+    - compliance

@@ -1,0 +1,7 @@
+---
+- name: Enterprise Patch Management
+  hosts: all
+  gather_facts: true
+
+  roles:
+    - patching

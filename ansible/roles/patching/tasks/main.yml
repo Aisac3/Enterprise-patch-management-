@@ -1,0 +1,43 @@
+---
+- name: Gather package facts
+  package_facts:
+    manager: auto
+
+- name: Update all packages
+  become: true
+  dnf:
+    name: "*"
+    state: latest
+  register: patch_result
+
+- name: Show patch result
+  debug:
+    var: patch_result.changed
+
+- name: Reboot server if updates were installed
+  become: true
+  reboot:
+    reboot_timeout: 600
+  when: patch_result.changed
+
+- name: Wait for host to come back
+  wait_for_connection:
+    delay: 10
+    timeout: 300
+
+- name: Verify uptime
+  command: uptime
+  register: uptime_output
+
+- name: Display uptime
+  debug:
+    var: uptime_output.stdout
+
+- name: Create patch report
+  copy:
+    content: |
+      Host: {{ inventory_hostname }}
+      Patched: {{ patch_result.changed }}
+      Date: {{ ansible_date_time.date }}
+      Kernel: {{ ansible_kernel }}
+    dest: /tmp/patch-report.txt

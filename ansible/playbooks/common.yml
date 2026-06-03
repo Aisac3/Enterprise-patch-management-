@@ -1,0 +1,6 @@
+---
+- name: Configure baseline servers
+  hosts: all
+
+  roles:
+    - common

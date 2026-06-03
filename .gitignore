@@ -25,3 +25,11 @@
 
 # VS Code
 .vscode/
+
+#Ansible Reports
+
+ansible/reports/
+
+#Python
+
+pycache/

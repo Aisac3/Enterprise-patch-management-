@@ -1,0 +1,27 @@
+# - name: Generate HTML report
+#   template:
+#     src: compliance_report.j2
+#     dest: /tmp/compliance-report.html
+
+# - name: Fetch HTML report
+#   fetch:
+#     src: /tmp/compliance-report.html
+#     dest: reports/
+#     flat: no
+
+---
+- name: Create reports directory
+  file:
+    path: reports
+    state: directory
+
+  delegate_to: localhost
+  run_once: true
+
+- name: Generate enterprise dashboard
+  template:
+    src: dashboard.j2
+    dest: reports/dashboard.html
+
+  delegate_to: localhost
+  run_once: true

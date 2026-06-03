@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Compliance Report</title>
+</head>
+<body>
+
+<h1>Compliance Report</h1>
+
+<h2>{{ ansible_hostname }}</h2>
+
+<table border="1">
+
+<tr>
+<td>Hostname</td>
+<td>{{ ansible_hostname }}</td>
+</tr>
+
+<tr>
+<td>OS</td>
+<td>{{ ansible_distribution }}</td>
+</tr>
+
+<tr>
+<td>Kernel</td>
+<td>{{ kernel_info.stdout }}</td>
+</tr>
+
+<tr>
+<td>Memory</td>
+<td><pre>{{ memory_info.stdout }}</pre></td>
+</tr>
+
+<tr>
+<td>Disk</td>
+<td><pre>{{ disk_info.stdout }}</pre></td>
+</tr>
+
+<tr>
+<td>Uptime</td>
+<td><pre>{{ uptime_info.stdout }}</pre></td>
+</tr>
+
+</table>
+
+</body>
+</html>

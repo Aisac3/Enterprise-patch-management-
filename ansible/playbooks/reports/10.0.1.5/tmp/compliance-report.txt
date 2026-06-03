@@ -1,0 +1,21 @@
+Hostname: 10.0.1.5
+Kernel: 5.14.0-611.55.1.el9_7.x86_64
+
+Uptime:
+ 04:44:45 up 12 min,  1 user,  load average: 0.00, 0.00, 0.00
+
+Memory:
+               total        used        free      shared  buff/cache   available
+Mem:             716         281         306           2         216         435
+Swap:              0           0           0
+
+Disk:
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        4.0M     0  4.0M   0% /dev
+tmpfs           359M     0  359M   0% /dev/shm
+tmpfs           144M  2.9M  141M   2% /run
+efivarfs        128K  3.3K  120K   3% /sys/firmware/efi/efivars
+/dev/nvme0n1p4  8.8G  2.7G  6.2G  30% /
+/dev/nvme0n1p3  960M  267M  694M  28% /boot
+/dev/nvme0n1p2  200M  7.7M  193M   4% /boot/efi
+tmpfs            72M     0   72M   0% /run/user/1000

@@ -1,0 +1,72 @@
+---
+- name: Get uptime
+  command: uptime
+  register: uptime_info
+
+- name: Get disk usage
+  command: df -h
+  register: disk_info
+
+- name: Get memory usage
+  command: free -m
+  register: memory_info
+
+- name: Get kernel version
+  command: uname -r
+  register: kernel_info
+
+- name: Create compliance report
+  copy:
+    content: |
+      Hostname: {{ inventory_hostname }}
+      Kernel: {{ kernel_info.stdout }}
+
+      Uptime:
+      {{ uptime_info.stdout }}
+
+      Memory:
+      {{ memory_info.stdout }}
+
+      Disk:
+      {{ disk_info.stdout }}
+    dest: /tmp/compliance-report.txt
+- name: Fetch report
+  fetch:
+    src: /tmp/compliance-report.txt
+    dest: reports/
+    flat: no
+
+- name: Get root filesystem usage
+  shell: |
+    df -h / | awk 'NR==2 {gsub("%","",$5); print $5}'
+  register: disk_usage
+
+  changed_when: false
+
+- name: Get memory usage percentage
+  shell: |
+    free | awk '/Mem:/ {printf("%.0f"), $3/$2 * 100}'
+  register: memory_usage
+
+  changed_when: false
+
+- name: Gather service facts
+  service_facts:
+
+- name: Set compliance status
+  set_fact:
+
+    compliance_status: >-
+      {% if disk_usage.stdout | int > 80 %}
+      Warning
+      {% elif memory_usage.stdout | int > 90 %}
+      Warning
+      {% elif ansible_facts.services['chronyd.service'].state != 'running' %}
+      Warning
+      {% else %}
+      Compliant
+      {% endif %}
+
+- name: Display compliance status
+  debug:
+    msg: "{{ compliance_status }}"

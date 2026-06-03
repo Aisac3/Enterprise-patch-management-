@@ -1,0 +1,7 @@
+---
+- name: Generate Compliance Reports
+  hosts: all
+
+  roles:
+    - compliance
+    - reporting
