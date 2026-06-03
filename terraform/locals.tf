@@ -2,22 +2,22 @@ locals {
 
   servers = {
     controller = {
-      environment = "management"
+      environment   = "management"
       instance_type = "t3.micro"
     }
 
     dev = {
-      environment = "dev"
+      environment   = "dev"
       instance_type = "t3.micro"
     }
 
     test = {
-      environment = "test"
+      environment   = "test"
       instance_type = "t3.micro"
     }
 
     prod = {
-      environment = "prod"
+      environment   = "prod"
       instance_type = "t3.micro"
     }
   }
